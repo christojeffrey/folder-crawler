@@ -29,34 +29,71 @@
         private void InitializeComponent()
         {
             this.btnHelloWorld = new System.Windows.Forms.Button();
-            this.lblHelloWorld = new System.Windows.Forms.Label();
+            this.lblDirectory = new System.Windows.Forms.Label();
+            this.lblOutput = new System.Windows.Forms.Label();
+            this.btnBFS = new System.Windows.Forms.Button();
+            this.btnDFS = new System.Windows.Forms.Button();
             this.SuspendLayout();
             // 
             // btnHelloWorld
             // 
-            this.btnHelloWorld.Location = new System.Drawing.Point(338, 96);
+            this.btnHelloWorld.Location = new System.Drawing.Point(35, 33);
             this.btnHelloWorld.Name = "btnHelloWorld";
-            this.btnHelloWorld.Size = new System.Drawing.Size(75, 23);
+            this.btnHelloWorld.Size = new System.Drawing.Size(203, 30);
             this.btnHelloWorld.TabIndex = 0;
-            this.btnHelloWorld.Text = "click me";
+            this.btnHelloWorld.Text = "Select Directory";
             this.btnHelloWorld.UseVisualStyleBackColor = true;
-            this.btnHelloWorld.Click += new System.EventHandler(this.button1_Click);
+            this.btnHelloWorld.Click += new System.EventHandler(this.btnHelloWorld_Click);
             // 
-            // lblHelloWorld
+            // lblDirectory
             // 
-            this.lblHelloWorld.AutoSize = true;
-            this.lblHelloWorld.Location = new System.Drawing.Point(393, 209);
-            this.lblHelloWorld.Name = "lblHelloWorld";
-            this.lblHelloWorld.Size = new System.Drawing.Size(35, 13);
-            this.lblHelloWorld.TabIndex = 1;
-            this.lblHelloWorld.Text = "label1";
+            this.lblDirectory.AutoSize = true;
+            this.lblDirectory.Location = new System.Drawing.Point(122, 76);
+            this.lblDirectory.Name = "lblDirectory";
+            this.lblDirectory.Size = new System.Drawing.Size(33, 16);
+            this.lblDirectory.TabIndex = 1;
+            this.lblDirectory.Text = "hem";
+            this.lblDirectory.Click += new System.EventHandler(this.label1_Click);
+            // 
+            // lblOutput
+            // 
+            this.lblOutput.AutoSize = true;
+            this.lblOutput.Location = new System.Drawing.Point(574, 147);
+            this.lblOutput.Name = "lblOutput";
+            this.lblOutput.Size = new System.Drawing.Size(43, 16);
+            this.lblOutput.TabIndex = 2;
+            this.lblOutput.Text = "output";
+            this.lblOutput.Click += new System.EventHandler(this.label1_Click_1);
+            // 
+            // btnBFS
+            // 
+            this.btnBFS.Location = new System.Drawing.Point(35, 278);
+            this.btnBFS.Name = "btnBFS";
+            this.btnBFS.Size = new System.Drawing.Size(75, 23);
+            this.btnBFS.TabIndex = 3;
+            this.btnBFS.Text = "BFS";
+            this.btnBFS.UseVisualStyleBackColor = true;
+            this.btnBFS.Click += new System.EventHandler(this.btnBFS_Click);
+            // 
+            // btnDFS
+            // 
+            this.btnDFS.Location = new System.Drawing.Point(163, 278);
+            this.btnDFS.Name = "btnDFS";
+            this.btnDFS.Size = new System.Drawing.Size(75, 23);
+            this.btnDFS.TabIndex = 4;
+            this.btnDFS.Text = "DFS";
+            this.btnDFS.UseVisualStyleBackColor = true;
+            this.btnDFS.Click += new System.EventHandler(this.btnDFS_Click);
             // 
             // Form1
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(800, 450);
-            this.Controls.Add(this.lblHelloWorld);
+            this.Controls.Add(this.btnDFS);
+            this.Controls.Add(this.btnBFS);
+            this.Controls.Add(this.lblOutput);
+            this.Controls.Add(this.lblDirectory);
             this.Controls.Add(this.btnHelloWorld);
             this.Name = "Form1";
             this.Text = "Form1";
@@ -68,7 +105,9 @@
         #endregion
 
         private System.Windows.Forms.Button btnHelloWorld;
-        private System.Windows.Forms.Label lblHelloWorld;
+        private System.Windows.Forms.Label lblDirectory;
+        private System.Windows.Forms.Label lblOutput;
+        private System.Windows.Forms.Button btnBFS;
+        private System.Windows.Forms.Button btnDFS;
     }
 }
-

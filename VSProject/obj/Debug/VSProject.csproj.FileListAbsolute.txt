@@ -13,4 +13,4 @@ C:\Users\Asus\Desktop\tubes stima dua\Folder-Crawling-Implementation-with-BFS-DF
 C:\Users\Asus\Desktop\tubes stima dua\Folder-Crawling-Implementation-with-BFS-DFS-Algorithm\VSProject\bin\Debug\Microsoft.Msagl.GraphViewerGdi.dll
 C:\Users\Asus\Desktop\tubes stima dua\Folder-Crawling-Implementation-with-BFS-DFS-Algorithm\VSProject\bin\Debug\Microsoft.Msagl.WpfGraphControl.dll
 C:\Users\Asus\Desktop\tubes stima dua\Folder-Crawling-Implementation-with-BFS-DFS-Algorithm\VSProject\obj\Debug\VSProject.csproj.CopyComplete
-C:\Users\Asus\Desktop\tubes stima dua\Folder-Crawling-Implementation-with-BFS-DFS-Algorithm\VSProject\obj\Debug\VSProject.Form1.resources
+C:\Users\Asus\Desktop\tubes stima dua\Folder-Crawling-Implementation-with-BFS-DFS-Algorithm\vsproject\obj\Debug\VSProject.Form1.resources

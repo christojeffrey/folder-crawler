@@ -30,7 +30,6 @@
         {
             this.btnHelloWorld = new System.Windows.Forms.Button();
             this.lblDirectory = new System.Windows.Forms.Label();
-            this.lblOutput = new System.Windows.Forms.Label();
             this.btnBFS = new System.Windows.Forms.Button();
             this.btnDFS = new System.Windows.Forms.Button();
             this.SuspendLayout();
@@ -54,16 +53,6 @@
             this.lblDirectory.TabIndex = 1;
             this.lblDirectory.Text = "hem";
             this.lblDirectory.Click += new System.EventHandler(this.label1_Click);
-            // 
-            // lblOutput
-            // 
-            this.lblOutput.AutoSize = true;
-            this.lblOutput.Location = new System.Drawing.Point(574, 147);
-            this.lblOutput.Name = "lblOutput";
-            this.lblOutput.Size = new System.Drawing.Size(43, 16);
-            this.lblOutput.TabIndex = 2;
-            this.lblOutput.Text = "output";
-            this.lblOutput.Click += new System.EventHandler(this.label1_Click_1);
             // 
             // btnBFS
             // 
@@ -92,7 +81,6 @@
             this.ClientSize = new System.Drawing.Size(800, 450);
             this.Controls.Add(this.btnDFS);
             this.Controls.Add(this.btnBFS);
-            this.Controls.Add(this.lblOutput);
             this.Controls.Add(this.lblDirectory);
             this.Controls.Add(this.btnHelloWorld);
             this.Name = "Form1";
@@ -106,7 +94,6 @@
 
         private System.Windows.Forms.Button btnHelloWorld;
         private System.Windows.Forms.Label lblDirectory;
-        private System.Windows.Forms.Label lblOutput;
         private System.Windows.Forms.Button btnBFS;
         private System.Windows.Forms.Button btnDFS;
     }

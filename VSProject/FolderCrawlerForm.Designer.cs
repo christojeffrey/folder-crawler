@@ -1,6 +1,6 @@
 ﻿namespace VSProject
 {
-    partial class Form1
+    partial class FolderCrawlerForm
     {
         /// <summary>
         /// Required designer variable.
@@ -28,21 +28,21 @@
         /// </summary>
         private void InitializeComponent()
         {
-            this.btnHelloWorld = new System.Windows.Forms.Button();
+            this.btnSelectDirectory = new System.Windows.Forms.Button();
             this.lblDirectory = new System.Windows.Forms.Label();
             this.btnBFS = new System.Windows.Forms.Button();
             this.btnDFS = new System.Windows.Forms.Button();
             this.SuspendLayout();
             // 
-            // btnHelloWorld
+            // btnSelectDirectory
             // 
-            this.btnHelloWorld.Location = new System.Drawing.Point(35, 33);
-            this.btnHelloWorld.Name = "btnHelloWorld";
-            this.btnHelloWorld.Size = new System.Drawing.Size(203, 30);
-            this.btnHelloWorld.TabIndex = 0;
-            this.btnHelloWorld.Text = "Select Directory";
-            this.btnHelloWorld.UseVisualStyleBackColor = true;
-            this.btnHelloWorld.Click += new System.EventHandler(this.btnHelloWorld_Click);
+            this.btnSelectDirectory.Location = new System.Drawing.Point(35, 33);
+            this.btnSelectDirectory.Name = "btnSelectDirectory";
+            this.btnSelectDirectory.Size = new System.Drawing.Size(203, 30);
+            this.btnSelectDirectory.TabIndex = 0;
+            this.btnSelectDirectory.Text = "Select Directory";
+            this.btnSelectDirectory.UseVisualStyleBackColor = true;
+            this.btnSelectDirectory.Click += new System.EventHandler(this.btnSelectDirectory_Click);
             // 
             // lblDirectory
             // 
@@ -52,7 +52,7 @@
             this.lblDirectory.Size = new System.Drawing.Size(33, 16);
             this.lblDirectory.TabIndex = 1;
             this.lblDirectory.Text = "hem";
-            this.lblDirectory.Click += new System.EventHandler(this.label1_Click);
+            this.lblDirectory.Click += new System.EventHandler(this.lblDirectory_Click);
             // 
             // btnBFS
             // 
@@ -74,7 +74,7 @@
             this.btnDFS.UseVisualStyleBackColor = true;
             this.btnDFS.Click += new System.EventHandler(this.btnDFS_Click);
             // 
-            // Form1
+            // FolderCrawlerForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
@@ -82,8 +82,8 @@
             this.Controls.Add(this.btnDFS);
             this.Controls.Add(this.btnBFS);
             this.Controls.Add(this.lblDirectory);
-            this.Controls.Add(this.btnHelloWorld);
-            this.Name = "Form1";
+            this.Controls.Add(this.btnSelectDirectory);
+            this.Name = "FolderCrawlerForm";
             this.Text = "Form1";
             this.ResumeLayout(false);
             this.PerformLayout();
@@ -91,10 +91,9 @@
         }
 
         #endregion
-
-        private System.Windows.Forms.Button btnHelloWorld;
         private System.Windows.Forms.Label lblDirectory;
         private System.Windows.Forms.Button btnBFS;
         private System.Windows.Forms.Button btnDFS;
+        private System.Windows.Forms.Button btnSelectDirectory;
     }
 }

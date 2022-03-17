@@ -51,7 +51,7 @@ namespace VSProject
             }
         }
 
-        public static void DFS(int parentid, string path)
+        public static void DFS(int parentid, string path, string target)
         {
             DirectoryInfo d = new DirectoryInfo(path);
 
@@ -72,14 +72,19 @@ namespace VSProject
                 GlobalVariable.outputGraph.AddEdge(parentid.ToString(), GlobalVariable.selfidcounter.ToString());
 
 
-                DFS(GlobalVariable.selfidcounter, @directory.FullName);
+                DFS(GlobalVariable.selfidcounter, @directory.FullName, target);
             }
 
             foreach (FileInfo file in Files)
             {
                 //this is where you code the 'action'
                 GlobalVariable.selfidcounter++;
-                GlobalVariable.outputGraph.AddNode(GlobalVariable.selfidcounter.ToString()).Label.Text = parentid + "," + GlobalVariable.selfidcounter + ", " + file.Name;
+                string outputName = file.Name;
+                if (file.Name == target)
+                {
+                    outputName += " (Target)";
+                }
+                GlobalVariable.outputGraph.AddNode(GlobalVariable.selfidcounter.ToString()).Label.Text = parentid + "," + GlobalVariable.selfidcounter + ", " + outputName;
                 //connect to parent
                 GlobalVariable.outputGraph.AddEdge(parentid.ToString(), GlobalVariable.selfidcounter.ToString());
             }

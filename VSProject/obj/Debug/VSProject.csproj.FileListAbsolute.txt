@@ -14,3 +14,18 @@ C:\Users\Asus\Desktop\tubes stima dua\Folder-Crawling-Implementation-with-BFS-DF
 C:\Users\Asus\Desktop\tubes stima dua\Folder-Crawling-Implementation-with-BFS-DFS-Algorithm\VSProject\bin\Debug\Microsoft.Msagl.WpfGraphControl.dll
 C:\Users\Asus\Desktop\tubes stima dua\Folder-Crawling-Implementation-with-BFS-DFS-Algorithm\VSProject\obj\Debug\VSProject.csproj.CopyComplete
 C:\Users\Asus\Desktop\tubes stima dua\Folder-Crawling-Implementation-with-BFS-DFS-Algorithm\vsproject\obj\Debug\VSProject.FolderCrawlerForm.resources
+C:\Users\Gede Prasidha\Documents\Kuliah Semester 4\Folder-Crawling-Implementation-with-BFS-DFS-Algorithm\VSProject\bin\Debug\VSProject.exe.config
+C:\Users\Gede Prasidha\Documents\Kuliah Semester 4\Folder-Crawling-Implementation-with-BFS-DFS-Algorithm\VSProject\bin\Debug\VSProject.exe
+C:\Users\Gede Prasidha\Documents\Kuliah Semester 4\Folder-Crawling-Implementation-with-BFS-DFS-Algorithm\VSProject\bin\Debug\VSProject.pdb
+C:\Users\Gede Prasidha\Documents\Kuliah Semester 4\Folder-Crawling-Implementation-with-BFS-DFS-Algorithm\VSProject\bin\Debug\AutomaticGraphLayout.dll
+C:\Users\Gede Prasidha\Documents\Kuliah Semester 4\Folder-Crawling-Implementation-with-BFS-DFS-Algorithm\VSProject\bin\Debug\AutomaticGraphLayout.Drawing.dll
+C:\Users\Gede Prasidha\Documents\Kuliah Semester 4\Folder-Crawling-Implementation-with-BFS-DFS-Algorithm\VSProject\bin\Debug\Microsoft.Msagl.GraphViewerGdi.dll
+C:\Users\Gede Prasidha\Documents\Kuliah Semester 4\Folder-Crawling-Implementation-with-BFS-DFS-Algorithm\VSProject\bin\Debug\Microsoft.Msagl.WpfGraphControl.dll
+C:\Users\Gede Prasidha\Documents\Kuliah Semester 4\Folder-Crawling-Implementation-with-BFS-DFS-Algorithm\VSProject\obj\Debug\VSProject.csproj.AssemblyReference.cache
+C:\Users\Gede Prasidha\Documents\Kuliah Semester 4\Folder-Crawling-Implementation-with-BFS-DFS-Algorithm\VSProject\obj\Debug\VSProject.FolderCrawlerForm.resources
+C:\Users\Gede Prasidha\Documents\Kuliah Semester 4\Folder-Crawling-Implementation-with-BFS-DFS-Algorithm\VSProject\obj\Debug\VSProject.Properties.Resources.resources
+C:\Users\Gede Prasidha\Documents\Kuliah Semester 4\Folder-Crawling-Implementation-with-BFS-DFS-Algorithm\VSProject\obj\Debug\VSProject.csproj.GenerateResource.cache
+C:\Users\Gede Prasidha\Documents\Kuliah Semester 4\Folder-Crawling-Implementation-with-BFS-DFS-Algorithm\VSProject\obj\Debug\VSProject.csproj.CoreCompileInputs.cache
+C:\Users\Gede Prasidha\Documents\Kuliah Semester 4\Folder-Crawling-Implementation-with-BFS-DFS-Algorithm\VSProject\obj\Debug\VSProject.csproj.CopyComplete
+C:\Users\Gede Prasidha\Documents\Kuliah Semester 4\Folder-Crawling-Implementation-with-BFS-DFS-Algorithm\VSProject\obj\Debug\VSProject.exe
+C:\Users\Gede Prasidha\Documents\Kuliah Semester 4\Folder-Crawling-Implementation-with-BFS-DFS-Algorithm\VSProject\obj\Debug\VSProject.pdb

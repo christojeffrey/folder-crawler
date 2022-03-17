@@ -84,7 +84,7 @@ namespace VSProject
             //setup
             FolderCrawlerAlgo.GlobalVariable.selfidcounter = 0;
 
-            FolderCrawlerAlgo.DFS(0, @lblDirectory.Text);
+            FolderCrawlerAlgo.DFS(0, @lblDirectory.Text, TargetFilename.Text);
 
             // outputing to graph
             FolderCrawlerAlgo.GlobalVariable.viewer.Graph = FolderCrawlerAlgo.GlobalVariable.outputGraph;

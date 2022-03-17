@@ -36,17 +36,17 @@ namespace VSProject
         }
         
 
-        private void btnSelectDirectory_Click(object sender, EventArgs e)
+        private void SelectDirectoryButton_Click(object sender, EventArgs e)
         {
             FolderBrowserDialog folderDlg = new FolderBrowserDialog();
             DialogResult result = folderDlg.ShowDialog();
 
             if (result == DialogResult.OK)
             {
-                lblDirectory.Text = folderDlg.SelectedPath;
+                LabelDirectory.Text = folderDlg.SelectedPath;
             }
         }
-        private void btnBFS_Click(object sender, EventArgs e)
+        private void BFSButton_Click(object sender, EventArgs e)
         {
 
             //clearing the graph
@@ -61,14 +61,14 @@ namespace VSProject
             }
 
             //run the algorithm
-            FolderCrawlerAlgo.BFS(@lblDirectory.Text);
+            FolderCrawlerAlgo.BFS(LabelDirectory.Text);
 
             // outputing to graph
             FolderCrawlerAlgo.GlobalVariable.viewer.Graph = FolderCrawlerAlgo.GlobalVariable.outputGraph;
 
         }
 
-        private void btnDFS_Click(object sender, EventArgs e)
+        private void DFSButton_Click(object sender, EventArgs e)
         {
             //clearing the graph
             foreach (Node node in FolderCrawlerAlgo.GlobalVariable.outputGraph.Nodes.ToArray())
@@ -84,13 +84,13 @@ namespace VSProject
             //setup
             FolderCrawlerAlgo.GlobalVariable.selfidcounter = 0;
 
-            FolderCrawlerAlgo.DFS(0, @lblDirectory.Text, TargetFilename.Text);
+            FolderCrawlerAlgo.DFS(0, LabelDirectory.Text, TargetFilename.Text);
 
             // outputing to graph
             FolderCrawlerAlgo.GlobalVariable.viewer.Graph = FolderCrawlerAlgo.GlobalVariable.outputGraph;
         }
 
-        private void lblDirectory_Click(object sender, EventArgs e)
+        private void LabelDirectory_Click(object sender, EventArgs e)
         {
 
         }

@@ -8,7 +8,7 @@ namespace VSProject
     {
         
         [STAThread]
-        public static void Main(string[] args)
+        public static void Main()
         {
             // Starts the application.
             Console.WriteLine("fuck the World!");
@@ -23,7 +23,6 @@ namespace VSProject
             FolderCrawlerAlgo.GlobalVariable.viewer.Dock = DockStyle.Fill;
             FolderCrawler.Controls.Add(FolderCrawlerAlgo.GlobalVariable.viewer);
 
-
             Application.Run(FolderCrawler);
         }
         
@@ -31,7 +30,6 @@ namespace VSProject
         {
             InitializeComponent();
         }
-        
 
         private void SelectDirectoryButton_Click(object sender, EventArgs e)
         {
@@ -88,6 +86,22 @@ namespace VSProject
         }
 
         private void LabelDirectory_Click(object sender, EventArgs e)
+        {
+
+        }
+
+
+        private void Title_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void ListBoxOutput_SelectedIndexChanged(object sender, EventArgs e)
+        {
+   
+        }
+
+        private void CheckBoxFindAllOccurance(object sender, EventArgs e)
         {
 
         }

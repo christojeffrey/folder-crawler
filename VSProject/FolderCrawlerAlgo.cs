@@ -9,7 +9,6 @@ namespace VSProject
     {
         public static class GlobalVariable
         {
-
             public static Graph outputGraph = new Graph("graph");
             public static GViewer viewer = new GViewer();
             public static int selfidcounter;
@@ -50,7 +49,6 @@ namespace VSProject
                 }
             }
         }
-
         public static void DFS(int parentid, string path, string target)
         {
             DirectoryInfo d = new DirectoryInfo(path);

@@ -33,6 +33,9 @@
             this.BFSButton = new System.Windows.Forms.Button();
             this.DFSButton = new System.Windows.Forms.Button();
             this.TargetFilename = new System.Windows.Forms.TextBox();
+            this.Title = new System.Windows.Forms.Label();
+            this.LabelOutput = new System.Windows.Forms.Label();
+            this.ListBoxOutput = new System.Windows.Forms.ListBox();
             this.SuspendLayout();
             // 
             // SelectDirectoryButton
@@ -50,7 +53,7 @@
             this.LabelDirectory.AutoSize = true;
             this.LabelDirectory.Location = new System.Drawing.Point(122, 76);
             this.LabelDirectory.Name = "LabelDirectory";
-            this.LabelDirectory.Size = new System.Drawing.Size(35, 17);
+            this.LabelDirectory.Size = new System.Drawing.Size(33, 16);
             this.LabelDirectory.TabIndex = 1;
             this.LabelDirectory.Text = "hem";
             this.LabelDirectory.Click += new System.EventHandler(this.LabelDirectory_Click);
@@ -82,11 +85,36 @@
             this.TargetFilename.Size = new System.Drawing.Size(203, 22);
             this.TargetFilename.TabIndex = 5;
             // 
+            // Title
+            // 
+            this.Title.AutoSize = true;
+            this.Title.Font = new System.Drawing.Font("Microsoft Sans Serif", 40F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.Title.Location = new System.Drawing.Point(330, 29);
+            this.Title.Name = "Title";
+            this.Title.Size = new System.Drawing.Size(407, 63);
+            this.Title.TabIndex = 6;
+            this.Title.Text = "Folder Crawling";
+            this.Title.Click += new System.EventHandler(this.Title_Click);
+            // 
+           
+            // ListBoxOutput
+            // 
+            this.ListBoxOutput.FormattingEnabled = true;
+            this.ListBoxOutput.ItemHeight = 16;
+            this.ListBoxOutput.Location = new System.Drawing.Point(125, 368);
+            this.ListBoxOutput.Name = "ListBoxOutput";
+            this.ListBoxOutput.Size = new System.Drawing.Size(520, 52);
+            this.ListBoxOutput.TabIndex = 8;
+            this.ListBoxOutput.SelectedIndexChanged += new System.EventHandler(this.ListBoxOutput_SelectedIndexChanged);
+            // 
             // FolderCrawlerForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(800, 450);
+            this.Controls.Add(this.ListBoxOutput);
+            this.Controls.Add(this.LabelOutput);
+            this.Controls.Add(this.Title);
             this.Controls.Add(this.TargetFilename);
             this.Controls.Add(this.DFSButton);
             this.Controls.Add(this.BFSButton);
@@ -105,5 +133,9 @@
         private System.Windows.Forms.Button DFSButton;
         private System.Windows.Forms.Button SelectDirectoryButton;
         private System.Windows.Forms.TextBox TargetFilename;
+        private System.Windows.Forms.Label Title;
+        private System.Windows.Forms.Label LabelOutput;
+        private System.Windows.Forms.ListBox ListBoxOutput;
+       // private System.Windows.Forms.CheckBox CheckBoxFindAllOccurance;
     }
 }

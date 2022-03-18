@@ -13,32 +13,37 @@ namespace VSProject
             // Starts the application.
             Console.WriteLine("fuck the World!");
             Console.WriteLine("this is the program entry point! im not sure this thing will show up");
-            FolderCrawlerForm FolderCrawler = new FolderCrawlerForm();
+            
 
 
             //bind the graph to the viewer 
             FolderCrawlerAlgo.GlobalVariable.viewer.Graph = FolderCrawlerAlgo.GlobalVariable.outputGraph;
-            //associate the viewer with the form 
-            FolderCrawler.SuspendLayout();
-            FolderCrawlerAlgo.GlobalVariable.viewer.Dock = DockStyle.Fill;
-            FolderCrawler.Controls.Add(FolderCrawlerAlgo.GlobalVariable.viewer);
 
-            Application.Run(FolderCrawler);
+            //associate the viewer with the form 
+            FolderCrawlerAlgo.GlobalVariable.FolderCrawler.SuspendLayout();
+
+
+            FolderCrawlerAlgo.GlobalVariable.FolderCrawler.OutputPanel.Controls.Add(FolderCrawlerAlgo.GlobalVariable.viewer);
+            Application.Run(FolderCrawlerAlgo.GlobalVariable.FolderCrawler);
+
+
         }
-        
+
         public FolderCrawlerForm()
         {
             InitializeComponent();
         }
-
+        public void outputPanelRefresher()
+        {
+            FolderCrawlerAlgo.GlobalVariable.FolderCrawler.OutputLabel.Update();
+        }
         private void SelectDirectoryButton_Click(object sender, EventArgs e)
         {
-            FolderBrowserDialog folderDlg = new FolderBrowserDialog();
-            DialogResult result = folderDlg.ShowDialog();
-
-            if (result == DialogResult.OK)
+            FolderBrowserDialog folderBrowserDialog1 = new FolderBrowserDialog();
+            if (folderBrowserDialog1.ShowDialog() == DialogResult.OK)
             {
-                LabelDirectory.Text = folderDlg.SelectedPath;
+                LabelDirectory.Text = folderBrowserDialog1.SelectedPath;
+
             }
         }
 
@@ -63,7 +68,7 @@ namespace VSProject
 
         }
 
-        private void button1_Click(object sender, EventArgs e)
+        private void SearchButton_Click(object sender, EventArgs e)
         {
             if (DFSButton.Checked == true)
             {//clearing the graph
@@ -80,11 +85,12 @@ namespace VSProject
                 //setup
                 FolderCrawlerAlgo.GlobalVariable.selfidcounter = 0;
 
-                FolderCrawlerAlgo.DFS(0, LabelDirectory.Text, TargetFilename.Text);
+                FolderCrawlerAlgo.DFSCaller(LabelDirectory.Text, TargetFilename.Text, IsAllOccuranceCheckBox.Checked);
+           
+
 
                 // outputing to graph
                 FolderCrawlerAlgo.GlobalVariable.viewer.Graph = FolderCrawlerAlgo.GlobalVariable.outputGraph;
-                //panel1.Controls.Add();
             }
             else if (BFSButton.Checked == true)
             {//clearing the graph
@@ -99,11 +105,21 @@ namespace VSProject
                 }
 
                 //run the algorithm
-                FolderCrawlerAlgo.BFS(LabelDirectory.Text);
+                FolderCrawlerAlgo.BFS(LabelDirectory.Text, TargetFilename.Text, IsAllOccuranceCheckBox.Checked);
 
                 // outputing to graph
                 FolderCrawlerAlgo.GlobalVariable.viewer.Graph = FolderCrawlerAlgo.GlobalVariable.outputGraph;
             }
+
+        }
+
+        private void DFSButton_CheckedChanged(object sender, EventArgs e)
+        {
+
+        }
+
+        private void BFSButton_CheckedChanged(object sender, EventArgs e)
+        {
 
         }
     }

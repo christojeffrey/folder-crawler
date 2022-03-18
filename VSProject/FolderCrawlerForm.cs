@@ -41,49 +41,6 @@ namespace VSProject
                 LabelDirectory.Text = folderDlg.SelectedPath;
             }
         }
-        private void BFSButton_Click(object sender, EventArgs e)
-        {
-
-            //clearing the graph
-            foreach (Node node in FolderCrawlerAlgo.GlobalVariable.outputGraph.Nodes.ToArray())
-            {
-                FolderCrawlerAlgo.GlobalVariable.outputGraph.RemoveNode(node);
-            }
-
-            foreach (Edge edge in FolderCrawlerAlgo.GlobalVariable.outputGraph.Edges.ToArray())
-            {
-                FolderCrawlerAlgo.GlobalVariable.outputGraph.RemoveEdge(edge);
-            }
-
-            //run the algorithm
-            FolderCrawlerAlgo.BFS(LabelDirectory.Text);
-
-            // outputing to graph
-            FolderCrawlerAlgo.GlobalVariable.viewer.Graph = FolderCrawlerAlgo.GlobalVariable.outputGraph;
-
-        }
-
-        private void DFSButton_Click(object sender, EventArgs e)
-        {
-            //clearing the graph
-            foreach (Node node in FolderCrawlerAlgo.GlobalVariable.outputGraph.Nodes.ToArray())
-            {
-                FolderCrawlerAlgo.GlobalVariable.outputGraph.RemoveNode(node);
-            }
-
-            foreach (Edge edge in FolderCrawlerAlgo.GlobalVariable.outputGraph.Edges.ToArray())
-            {
-                FolderCrawlerAlgo.GlobalVariable.outputGraph.RemoveEdge(edge);
-            }
-
-            //setup
-            FolderCrawlerAlgo.GlobalVariable.selfidcounter = 0;
-
-            FolderCrawlerAlgo.DFS(0, LabelDirectory.Text, TargetFilename.Text);
-
-            // outputing to graph
-            FolderCrawlerAlgo.GlobalVariable.viewer.Graph = FolderCrawlerAlgo.GlobalVariable.outputGraph;
-        }
 
         private void LabelDirectory_Click(object sender, EventArgs e)
         {
@@ -103,6 +60,50 @@ namespace VSProject
 
         private void CheckBoxFindAllOccurance(object sender, EventArgs e)
         {
+
+        }
+
+        private void button1_Click(object sender, EventArgs e)
+        {
+            if (DFSButton.Checked == true)
+            {//clearing the graph
+                foreach (Node node in FolderCrawlerAlgo.GlobalVariable.outputGraph.Nodes.ToArray())
+                {
+                    FolderCrawlerAlgo.GlobalVariable.outputGraph.RemoveNode(node);
+                }
+
+                foreach (Edge edge in FolderCrawlerAlgo.GlobalVariable.outputGraph.Edges.ToArray())
+                {
+                    FolderCrawlerAlgo.GlobalVariable.outputGraph.RemoveEdge(edge);
+                }
+
+                //setup
+                FolderCrawlerAlgo.GlobalVariable.selfidcounter = 0;
+
+                FolderCrawlerAlgo.DFS(0, LabelDirectory.Text, TargetFilename.Text);
+
+                // outputing to graph
+                FolderCrawlerAlgo.GlobalVariable.viewer.Graph = FolderCrawlerAlgo.GlobalVariable.outputGraph;
+                //panel1.Controls.Add();
+            }
+            else if (BFSButton.Checked == true)
+            {//clearing the graph
+                foreach (Node node in FolderCrawlerAlgo.GlobalVariable.outputGraph.Nodes.ToArray())
+                {
+                    FolderCrawlerAlgo.GlobalVariable.outputGraph.RemoveNode(node);
+                }
+
+                foreach (Edge edge in FolderCrawlerAlgo.GlobalVariable.outputGraph.Edges.ToArray())
+                {
+                    FolderCrawlerAlgo.GlobalVariable.outputGraph.RemoveEdge(edge);
+                }
+
+                //run the algorithm
+                FolderCrawlerAlgo.BFS(LabelDirectory.Text);
+
+                // outputing to graph
+                FolderCrawlerAlgo.GlobalVariable.viewer.Graph = FolderCrawlerAlgo.GlobalVariable.outputGraph;
+            }
 
         }
     }

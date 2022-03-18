@@ -26,8 +26,10 @@ namespace VSProject
         {
             //note, the parentid of the root node is -1. the id of the root node is 0
 
-            //whoIsMyParent[child] = parent;
+            //cara pake, whoIsMyParent[child] = parent;
             Dictionary<int, int> whoIsMyParent = new Dictionary<int, int>();
+            // cara pake, edgeToPrent[child] = edgeToParent;
+            Dictionary<int, Edge> edgeToParent = new Dictionary<int, Edge>();
             Boolean Found = false;
 
             // data yg disimpen di tiap tuple di queue adalah <parent id, self id, diretory full name>
@@ -66,6 +68,7 @@ namespace VSProject
                 {
                     outputName += "(target)";
                     Found = true;
+                    GlobalVariable.FolderCrawler.listBoxPathAdder(d.FullName);
                 }
 
                 
@@ -76,7 +79,9 @@ namespace VSProject
 
                 if (currentNode.Item2 != 0)
                 {
-                    GlobalVariable.outputGraph.AddEdge(currentNode.Item1.ToString(), currentNode.Item2.ToString());
+                    //hubungin bapak ke anak. jangan dibalik, nti graphnya ikut kebalik
+                    Edge newEdge = GlobalVariable.outputGraph.AddEdge(currentNode.Item1.ToString(), currentNode.Item2.ToString());
+                    edgeToParent.Add(currentNode.Item2, newEdge);
                 }
 
 
@@ -107,7 +112,7 @@ namespace VSProject
                 }
                
 
-                // color everyone of it's parent
+                // color itself (anak), it's parent(bapak), and it's parent's parent(kakek), (kakek buyut), dst
                 // priority blue, red, black. if while coloring, it encounter a node with higher priority, it will stop
                 int child = currentNode.Item2;
                 while(child != -1)
@@ -122,10 +127,24 @@ namespace VSProject
                         break;
                     }
                     GlobalVariable.outputGraph.FindNode(child.ToString()).Label.FontColor = color;
-                   
 
-                    child = Convert.ToInt32(whoIsMyParent[child]);
+
+                   
+                    //updating edge. try to use it by id, not working. jadinya ya gini, di delete dulu trus ditambahin lagi. sadly begini
+                    int parent = whoIsMyParent[child];
+                    if (child != 0)
+                    {
+                        Edge prevEdge = edgeToParent[child];
+                        GlobalVariable.outputGraph.RemoveEdge(prevEdge);
+                        Edge newEdge = GlobalVariable.outputGraph.AddEdge(parent.ToString(), child.ToString());
+                        edgeToParent.Remove(child);
+                        edgeToParent.Add(child, newEdge);
+                        newEdge.Attr.Color = color;
+                    }
+
+                    child = parent;
                 }
+              
 
 
 
@@ -147,6 +166,8 @@ namespace VSProject
         }
         public static void DFSCaller(string path, string target, Boolean isAllOccurance)
         {
+            //note, the parentid of the root node is -1. the id of the root node is 0
+
             Boolean FoundHolder = FolderCrawlerAlgo.DFS(-1, path, target, isAllOccurance);
             if (FoundHolder)
             {
@@ -174,15 +195,16 @@ namespace VSProject
                 parentid = 0;
             }
 
-            //THIS CHUNK OF CODE IS TO COVER IS SEARCHING FOR DIRECTORY START
+            //THIS CHUNK OF CODE IS TO COVER SEARCHING FOR DIRECTORY
             if (d.Name == target)
             {
                 GlobalVariable.outputGraph.FindNode(GlobalVariable.selfidcounter.ToString()).Label.Text += " (Target)";
                 isFound = true;
+                GlobalVariable.FolderCrawler.listBoxPathAdder(d.FullName);
                 GlobalVariable.outputGraph.FindNode(GlobalVariable.selfidcounter.ToString()).Label.FontColor = Color.Blue;
             }
 
-            //THIS CHUNK OF CODE IS TO COVER IS SEARCHING FOR DIRECTORY DONE
+            //THIS CHUNK OF CODE IS TO COVER SEARCHING FOR DIRECTORY
 
 
 
@@ -195,8 +217,7 @@ namespace VSProject
                 GlobalVariable.selfidcounter++;
                 int selfid = GlobalVariable.selfidcounter;
                 GlobalVariable.outputGraph.AddNode(selfid.ToString()).Label.Text = parentid + "," + selfid + ", " + directory.Name;
-                //connect to parent
-                GlobalVariable.outputGraph.AddEdge(parentid.ToString(), selfid.ToString());
+              
 
                 
 
@@ -208,21 +229,25 @@ namespace VSProject
                 //else, if my color is not blue, color me red
                 GlobalVariable.outputGraph.FindNode(selfid.ToString()).Label.Text += isInsideFound.ToString();
 
+                Color color = Color.Black;
                 if (isInsideFound)
                 {
                     isFound = true;
-                    GlobalVariable.outputGraph.FindNode(selfid.ToString()).Label.FontColor = Color.Blue;
+                    color = Color.Blue;
                 }
                 else
                 {
                     if (GlobalVariable.outputGraph.FindNode(GlobalVariable.selfidcounter.ToString()).Label.FontColor != Color.Blue)
                     {
-                        GlobalVariable.outputGraph.FindNode(selfid.ToString()).Label.FontColor = Color.Red;
+                        color = Color.Red;
                     }
                     //else color me black, which is default
                 }
+                GlobalVariable.outputGraph.FindNode(selfid.ToString()).Label.FontColor = color;
 
-                
+                //connect to parent and coloring
+                GlobalVariable.outputGraph.AddEdge(parentid.ToString(), selfid.ToString()).Attr.Color = color;
+
 
                 //deciding whether should continue searching
                 if (isInsideFound && !isAllOccurance)
@@ -241,22 +266,22 @@ namespace VSProject
                 GlobalVariable.outputGraph.AddNode(selfid.ToString()).Label.Text = parentid + "," + selfid + ", " + outputName;
 
                 //coloring
+                Color color = Color.Red;
                 if (file.Name == target)
                 {
                     outputName += " (Target)";
                     isFound = true;
-                    GlobalVariable.outputGraph.FindNode(selfid.ToString()).Label.FontColor = Color.Blue;
+                    GlobalVariable.FolderCrawler.listBoxPathAdder(file.FullName);
+                    color = Color.Blue;
                 }
                
-                else
-                {
-                    GlobalVariable.outputGraph.FindNode(selfid.ToString()).Label.FontColor = Color.Red;
+                    
+                GlobalVariable.outputGraph.FindNode(selfid.ToString()).Label.FontColor = color;
 
-                }
 
 
                 //connect to parent
-                GlobalVariable.outputGraph.AddEdge(parentid.ToString(), selfid.ToString());
+                GlobalVariable.outputGraph.AddEdge(parentid.ToString(), selfid.ToString()).Attr.Color = color;
             }
           
             return isFound;

@@ -1,4 +1,6 @@
 ﻿using System;
+using System.Diagnostics;
+using System.IO;
 using System.Linq;
 using System.Windows.Forms;
 using Microsoft.Msagl.Drawing;
@@ -33,18 +35,19 @@ namespace VSProject
         {
             InitializeComponent();
         }
-        public void outputPanelRefresher()
-        {
-            FolderCrawlerAlgo.GlobalVariable.FolderCrawler.OutputLabel.Update();
-        }
+
+
+       
         private void SelectDirectoryButton_Click(object sender, EventArgs e)
         {
             FolderBrowserDialog folderBrowserDialog1 = new FolderBrowserDialog();
             if (folderBrowserDialog1.ShowDialog() == DialogResult.OK)
             {
                 LabelDirectory.Text = folderBrowserDialog1.SelectedPath;
+           
 
             }
+
         }
 
         private void LabelDirectory_Click(object sender, EventArgs e)
@@ -60,7 +63,7 @@ namespace VSProject
 
         private void ListBoxOutput_SelectedIndexChanged(object sender, EventArgs e)
         {
-   
+            
         }
 
         private void CheckBoxFindAllOccurance(object sender, EventArgs e)
@@ -81,10 +84,13 @@ namespace VSProject
                 {
                     FolderCrawlerAlgo.GlobalVariable.outputGraph.RemoveEdge(edge);
                 }
+                //clearing listbox
+                ListBoxOutput.Items.Clear();
 
                 //setup
                 FolderCrawlerAlgo.GlobalVariable.selfidcounter = 0;
 
+                //run the algorithm
                 FolderCrawlerAlgo.DFSCaller(LabelDirectory.Text, TargetFilename.Text, IsAllOccuranceCheckBox.Checked);
            
 
@@ -103,6 +109,8 @@ namespace VSProject
                 {
                     FolderCrawlerAlgo.GlobalVariable.outputGraph.RemoveEdge(edge);
                 }
+                //clearing listbox
+                ListBoxOutput.Items.Clear();
 
                 //run the algorithm
                 FolderCrawlerAlgo.BFS(LabelDirectory.Text, TargetFilename.Text, IsAllOccuranceCheckBox.Checked);
@@ -122,5 +130,56 @@ namespace VSProject
         {
 
         }
+
+        private void LinkLabelTest_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
+        {
+            ProcessStartInfo startInfo = new ProcessStartInfo
+            {
+                Arguments = @"C:\Users\Asus\Documents\WPA Files",
+                FileName = "explorer.exe",
+            };
+
+            //Process.Start(startInfo);
+            //ListBoxOutput.Items.Add(@"C:\Users\Asus\Documents\WPA Files");
+            //ListBoxOutput.Items.Add(@"C: \Users\Asus\Documents");
+
+            System.Object[] ItemObject = new System.Object[10];
+            for (int i = 0; i <= 9; i++)
+            {
+                ItemObject[i] = "Item" + i;
+            }
+            ListBoxOutput.Items.Add("T");
+
+        }
+
+        private void OpenButton_Click(object sender, EventArgs e)
+        {
+            string path = ListBoxOutput.SelectedItem.ToString();
+            string parent = Directory.GetParent(path).FullName;
+
+            ProcessStartInfo startInfo = new ProcessStartInfo
+            {
+                Arguments = parent,
+                FileName = "explorer.exe",
+            };
+
+            //MessageBox.Show(path);
+            Process.Start(startInfo);
+        }
+
+
+
+        //HELPER FUNCTION
+        public void outputPanelRefresher() //buat realtime. sejauh ini masih gagal
+        {
+            FolderCrawlerAlgo.GlobalVariable.FolderCrawler.OutputLabel.Update();
+        }
+        
+        public void listBoxPathAdder(string path) // buat nambahin path baru ke list box
+        {
+            ListBoxOutput.Items.Add(path);
+
+        }
+
     }
 }

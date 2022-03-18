@@ -44,6 +44,7 @@
             this.OutputLabel = new System.Windows.Forms.Label();
             this.OutputPanel = new System.Windows.Forms.Panel();
             this.BackgroundPanel = new System.Windows.Forms.Panel();
+            this.OpenButton = new System.Windows.Forms.Button();
             this.IsAllOccuranceCheckBox = new System.Windows.Forms.CheckBox();
             this.BackgroundPanel.SuspendLayout();
             this.SuspendLayout();
@@ -104,10 +105,10 @@
             // ListBoxOutput
             // 
             this.ListBoxOutput.FormattingEnabled = true;
-            this.ListBoxOutput.Location = new System.Drawing.Point(38, 628);
+            this.ListBoxOutput.Location = new System.Drawing.Point(40, 491);
             this.ListBoxOutput.Margin = new System.Windows.Forms.Padding(2, 3, 2, 3);
             this.ListBoxOutput.Name = "ListBoxOutput";
-            this.ListBoxOutput.Size = new System.Drawing.Size(283, 30);
+            this.ListBoxOutput.Size = new System.Drawing.Size(309, 108);
             this.ListBoxOutput.TabIndex = 8;
             this.ListBoxOutput.SelectedIndexChanged += new System.EventHandler(this.ListBoxOutput_SelectedIndexChanged);
             // 
@@ -148,7 +149,7 @@
             // SelectMethodLabel
             // 
             this.SelectMethodLabel.AutoSize = true;
-            this.SelectMethodLabel.Location = new System.Drawing.Point(35, 384);
+            this.SelectMethodLabel.Location = new System.Drawing.Point(35, 316);
             this.SelectMethodLabel.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.SelectMethodLabel.Name = "SelectMethodLabel";
             this.SelectMethodLabel.Size = new System.Drawing.Size(75, 13);
@@ -159,7 +160,7 @@
             // 
             this.DFSButton.AutoSize = true;
             this.DFSButton.ForeColor = System.Drawing.Color.RoyalBlue;
-            this.DFSButton.Location = new System.Drawing.Point(38, 399);
+            this.DFSButton.Location = new System.Drawing.Point(38, 352);
             this.DFSButton.Margin = new System.Windows.Forms.Padding(2);
             this.DFSButton.Name = "DFSButton";
             this.DFSButton.Size = new System.Drawing.Size(143, 17);
@@ -173,7 +174,7 @@
             // 
             this.BFSButton.AutoSize = true;
             this.BFSButton.ForeColor = System.Drawing.Color.RoyalBlue;
-            this.BFSButton.Location = new System.Drawing.Point(38, 420);
+            this.BFSButton.Location = new System.Drawing.Point(38, 373);
             this.BFSButton.Margin = new System.Windows.Forms.Padding(2);
             this.BFSButton.Name = "BFSButton";
             this.BFSButton.Size = new System.Drawing.Size(150, 17);
@@ -186,7 +187,7 @@
             // SearchButton
             // 
             this.SearchButton.BackColor = System.Drawing.Color.LightSteelBlue;
-            this.SearchButton.Location = new System.Drawing.Point(38, 494);
+            this.SearchButton.Location = new System.Drawing.Point(38, 445);
             this.SearchButton.Margin = new System.Windows.Forms.Padding(2);
             this.SearchButton.Name = "SearchButton";
             this.SearchButton.Size = new System.Drawing.Size(79, 22);
@@ -218,6 +219,7 @@
             // 
             // BackgroundPanel
             // 
+            this.BackgroundPanel.Controls.Add(this.OpenButton);
             this.BackgroundPanel.Controls.Add(this.IsAllOccuranceCheckBox);
             this.BackgroundPanel.Controls.Add(this.ListBoxOutput);
             this.BackgroundPanel.Controls.Add(this.SearchButton);
@@ -236,14 +238,24 @@
             this.BackgroundPanel.Size = new System.Drawing.Size(1026, 681);
             this.BackgroundPanel.TabIndex = 19;
             // 
+            // OpenButton
+            // 
+            this.OpenButton.Location = new System.Drawing.Point(38, 621);
+            this.OpenButton.Name = "OpenButton";
+            this.OpenButton.Size = new System.Drawing.Size(75, 23);
+            this.OpenButton.TabIndex = 19;
+            this.OpenButton.Text = "Open";
+            this.OpenButton.UseVisualStyleBackColor = true;
+            this.OpenButton.Click += new System.EventHandler(this.OpenButton_Click);
+            // 
             // IsAllOccuranceCheckBox
             // 
             this.IsAllOccuranceCheckBox.AutoSize = true;
-            this.IsAllOccuranceCheckBox.Location = new System.Drawing.Point(40, 457);
+            this.IsAllOccuranceCheckBox.Location = new System.Drawing.Point(40, 410);
             this.IsAllOccuranceCheckBox.Name = "IsAllOccuranceCheckBox";
-            this.IsAllOccuranceCheckBox.Size = new System.Drawing.Size(104, 17);
+            this.IsAllOccuranceCheckBox.Size = new System.Drawing.Size(116, 17);
             this.IsAllOccuranceCheckBox.TabIndex = 17;
-            this.IsAllOccuranceCheckBox.Text = "Is All Occurance";
+            this.IsAllOccuranceCheckBox.Text = "Find All Occurance";
             this.IsAllOccuranceCheckBox.UseVisualStyleBackColor = true;
             // 
             // FolderCrawlerForm
@@ -284,6 +296,6 @@
         private System.Windows.Forms.Panel OutputPanel;
         private System.Windows.Forms.Panel BackgroundPanel;
         private System.Windows.Forms.CheckBox IsAllOccuranceCheckBox;
-        // private System.Windows.Forms.CheckBox CheckBoxFindAllOccurance;
+        private System.Windows.Forms.Button OpenButton;
     }
 }

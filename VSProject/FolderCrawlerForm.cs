@@ -73,51 +73,55 @@ namespace VSProject
 
         private void SearchButton_Click(object sender, EventArgs e)
         {
-            if (DFSButton.Checked == true)
-            {//clearing the graph
-                foreach (Node node in FolderCrawlerAlgo.GlobalVariable.outputGraph.Nodes.ToArray())
-                {
-                    FolderCrawlerAlgo.GlobalVariable.outputGraph.RemoveNode(node);
-                }
+            if(LabelDirectory.Text != "")
+            {
+                if (DFSButton.Checked == true)
+                {//clearing the graph
+                    foreach (Node node in FolderCrawlerAlgo.GlobalVariable.outputGraph.Nodes.ToArray())
+                    {
+                        FolderCrawlerAlgo.GlobalVariable.outputGraph.RemoveNode(node);
+                    }
 
-                foreach (Edge edge in FolderCrawlerAlgo.GlobalVariable.outputGraph.Edges.ToArray())
-                {
-                    FolderCrawlerAlgo.GlobalVariable.outputGraph.RemoveEdge(edge);
-                }
-                //clearing listbox
-                ListBoxOutput.Items.Clear();
+                    foreach (Edge edge in FolderCrawlerAlgo.GlobalVariable.outputGraph.Edges.ToArray())
+                    {
+                        FolderCrawlerAlgo.GlobalVariable.outputGraph.RemoveEdge(edge);
+                    }
+                    //clearing listbox
+                    ListBoxOutput.Items.Clear();
 
-                //setup
-                FolderCrawlerAlgo.GlobalVariable.selfidcounter = 0;
+                    //setup
+                    FolderCrawlerAlgo.GlobalVariable.selfidcounter = 0;
 
-                //run the algorithm
-                FolderCrawlerAlgo.DFSCaller(LabelDirectory.Text, TargetFilename.Text, IsAllOccuranceCheckBox.Checked);
+                    //run the algorithm
+                    FolderCrawlerAlgo.DFSCaller(LabelDirectory.Text, TargetFilename.Text, IsAllOccuranceCheckBox.Checked);
            
 
 
-                // outputing to graph
-                FolderCrawlerAlgo.GlobalVariable.viewer.Graph = FolderCrawlerAlgo.GlobalVariable.outputGraph;
-            }
-            else if (BFSButton.Checked == true)
-            {//clearing the graph
-                foreach (Node node in FolderCrawlerAlgo.GlobalVariable.outputGraph.Nodes.ToArray())
-                {
-                    FolderCrawlerAlgo.GlobalVariable.outputGraph.RemoveNode(node);
+                    // outputing to graph
+                    FolderCrawlerAlgo.GlobalVariable.viewer.Graph = FolderCrawlerAlgo.GlobalVariable.outputGraph;
                 }
+                else if (BFSButton.Checked == true)
+                {//clearing the graph
+                    foreach (Node node in FolderCrawlerAlgo.GlobalVariable.outputGraph.Nodes.ToArray())
+                    {
+                        FolderCrawlerAlgo.GlobalVariable.outputGraph.RemoveNode(node);
+                    }
 
-                foreach (Edge edge in FolderCrawlerAlgo.GlobalVariable.outputGraph.Edges.ToArray())
-                {
-                    FolderCrawlerAlgo.GlobalVariable.outputGraph.RemoveEdge(edge);
+                    foreach (Edge edge in FolderCrawlerAlgo.GlobalVariable.outputGraph.Edges.ToArray())
+                    {
+                        FolderCrawlerAlgo.GlobalVariable.outputGraph.RemoveEdge(edge);
+                    }
+                    //clearing listbox
+                    ListBoxOutput.Items.Clear();
+
+                    //run the algorithm
+                    FolderCrawlerAlgo.BFS(LabelDirectory.Text, TargetFilename.Text, IsAllOccuranceCheckBox.Checked);
+
+                    // outputing to graph
+                    FolderCrawlerAlgo.GlobalVariable.viewer.Graph = FolderCrawlerAlgo.GlobalVariable.outputGraph;
                 }
-                //clearing listbox
-                ListBoxOutput.Items.Clear();
-
-                //run the algorithm
-                FolderCrawlerAlgo.BFS(LabelDirectory.Text, TargetFilename.Text, IsAllOccuranceCheckBox.Checked);
-
-                // outputing to graph
-                FolderCrawlerAlgo.GlobalVariable.viewer.Graph = FolderCrawlerAlgo.GlobalVariable.outputGraph;
             }
+            //else, belum ada directory yg dipilih
 
         }
 
@@ -154,17 +158,21 @@ namespace VSProject
 
         private void OpenButton_Click(object sender, EventArgs e)
         {
-            string path = ListBoxOutput.SelectedItem.ToString();
-            string parent = Directory.GetParent(path).FullName;
-
-            ProcessStartInfo startInfo = new ProcessStartInfo
+            if(ListBoxOutput.SelectedIndex != -1)
             {
-                Arguments = parent,
-                FileName = "explorer.exe",
-            };
+                string path = ListBoxOutput.SelectedItem.ToString();
+                string parent = Directory.GetParent(path).FullName;
 
-            //MessageBox.Show(path);
-            Process.Start(startInfo);
+                ProcessStartInfo startInfo = new ProcessStartInfo
+                {
+                    Arguments = parent,
+                    FileName = "explorer.exe",
+                };
+
+                //MessageBox.Show(path);
+                Process.Start(startInfo);
+            }
+            //else, belum ada yg dipilih
         }
 
 
@@ -172,7 +180,7 @@ namespace VSProject
         //HELPER FUNCTION
         public void outputPanelRefresher() //buat realtime. sejauh ini masih gagal
         {
-            FolderCrawlerAlgo.GlobalVariable.FolderCrawler.OutputLabel.Update();
+            FolderCrawlerAlgo.GlobalVariable.FolderCrawler.OutputPanel.Update();
         }
         
         public void listBoxPathAdder(string path) // buat nambahin path baru ke list box

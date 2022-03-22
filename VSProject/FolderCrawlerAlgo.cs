@@ -21,6 +21,8 @@ namespace VSProject
 
             //for DFS. using global variable
             public static int selfidcounter;
+            // cara pake, edgeToPrent[child] = edgeToParent;
+            public static Dictionary<int, Edge> DFSedgeToParent = new Dictionary<int, Edge>();
         }
         public static void BFS(string path, string target, Boolean isAllOccurance)
         {
@@ -144,17 +146,15 @@ namespace VSProject
 
                     child = parent;
                 }
-              
+
 
 
 
                 // realtime
-
-                // System.Threading.Thread.Sleep(500);
-                // outputing to graph
+                System.Threading.Thread.Sleep(700);
                 GlobalVariable.viewer.Graph =  GlobalVariable.outputGraph;
-                // refresh 
                 GlobalVariable.FolderCrawler.outputPanelRefresher();
+          
 
 
                 // break if found and not all occurance
@@ -167,6 +167,9 @@ namespace VSProject
         public static void DFSCaller(string path, string target, Boolean isAllOccurance)
         {
             //note, the parentid of the root node is -1. the id of the root node is 0
+
+            //clean dictionary
+            GlobalVariable.DFSedgeToParent.Clear();
 
             Boolean FoundHolder = FolderCrawlerAlgo.DFS(-1, path, target, isAllOccurance);
             if (FoundHolder)
@@ -194,14 +197,22 @@ namespace VSProject
                 GlobalVariable.selfidcounter = 0;
                 parentid = 0;
             }
+        
 
             //THIS CHUNK OF CODE IS TO COVER SEARCHING FOR DIRECTORY
             if (d.Name == target)
             {
                 GlobalVariable.outputGraph.FindNode(GlobalVariable.selfidcounter.ToString()).Label.Text += " (Target)";
-                isFound = true;
+                
                 GlobalVariable.FolderCrawler.listBoxPathAdder(d.FullName);
                 GlobalVariable.outputGraph.FindNode(GlobalVariable.selfidcounter.ToString()).Label.FontColor = Color.Blue;
+                
+
+                isFound = true;
+                if (!isAllOccurance)
+                {
+                    return true;
+                }
             }
 
             //THIS CHUNK OF CODE IS TO COVER SEARCHING FOR DIRECTORY
@@ -217,9 +228,23 @@ namespace VSProject
                 GlobalVariable.selfidcounter++;
                 int selfid = GlobalVariable.selfidcounter;
                 GlobalVariable.outputGraph.AddNode(selfid.ToString()).Label.Text = parentid + "," + selfid + ", " + directory.Name;
-              
+                //hubngin ke node atas dia
+                //GlobalVariable.outputGraph.AddEdge(parentid.ToString(), selfid.ToString());
 
-                
+
+
+                //connect to parent and catet edge to parent
+                Edge newEdge = GlobalVariable.outputGraph.AddEdge(parentid.ToString(), selfid.ToString());
+                GlobalVariable.DFSedgeToParent.Add(selfid, newEdge);
+
+
+
+                //adding realtime
+                GlobalVariable.viewer.Graph = GlobalVariable.outputGraph;
+                GlobalVariable.FolderCrawler.outputPanelRefresher();
+                System.Threading.Thread.Sleep(700);
+
+
 
                 Boolean isInsideFound; // to hold each one of the directory result
                 isInsideFound = DFS(selfid, @directory.FullName, target, isAllOccurance);
@@ -245,8 +270,13 @@ namespace VSProject
                 }
                 GlobalVariable.outputGraph.FindNode(selfid.ToString()).Label.FontColor = color;
 
-                //connect to parent and coloring
-                GlobalVariable.outputGraph.AddEdge(parentid.ToString(), selfid.ToString()).Attr.Color = color;
+                //update edge color
+                Edge prevEdge = GlobalVariable.DFSedgeToParent[selfid];
+                GlobalVariable.outputGraph.RemoveEdge(prevEdge);
+                Edge newColoredEdge = GlobalVariable.outputGraph.AddEdge(parentid.ToString(), selfid.ToString());
+                GlobalVariable.DFSedgeToParent.Remove(selfid);
+                GlobalVariable.DFSedgeToParent.Add(selfid, newColoredEdge);
+                newColoredEdge.Attr.Color = color;
 
 
                 //deciding whether should continue searching
@@ -282,6 +312,11 @@ namespace VSProject
 
                 //connect to parent
                 GlobalVariable.outputGraph.AddEdge(parentid.ToString(), selfid.ToString()).Attr.Color = color;
+            
+                //adding realtime
+                System.Threading.Thread.Sleep(700);
+                GlobalVariable.viewer.Graph = GlobalVariable.outputGraph;
+                GlobalVariable.FolderCrawler.outputPanelRefresher();
             }
           
             return isFound;

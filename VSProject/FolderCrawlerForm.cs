@@ -13,11 +13,6 @@ namespace VSProject
         public static void Main()
         {
             // Starts the application.
-            Console.WriteLine("fuck the World!");
-            Console.WriteLine("this is the program entry point! im not sure this thing will show up");
-            
-
-
             //bind the graph to the viewer 
             FolderCrawlerAlgo.GlobalVariable.viewer.Graph = FolderCrawlerAlgo.GlobalVariable.outputGraph;
 

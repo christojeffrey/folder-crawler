@@ -10,7 +10,7 @@ namespace VSProject
     {
         public static class GlobalVariable
         {
-            //public form and graph. can be accessed both by algo and form
+            // Inisialisasi Form dan Graf, dibuat public agar dapat diakses oleh FolderCrawlerForm dan FolderCrawlerAlgo
             public static Graph outputGraph = new Graph("graph");
             public static GViewer viewer = new GViewer() {
                 NavigationVisible = false,
@@ -19,25 +19,35 @@ namespace VSProject
         
             public static FolderCrawlerForm FolderCrawler = new FolderCrawlerForm();
 
-            //for DFS. using global variable
             public static int selfidcounter;
-            // cara pake, edgeToPrent[child] = edgeToParent;
+            // Sintaks untuk memakai kode berikut : edgeToPrent[child] = edgeToParent;
             public static Dictionary<int, Edge> DFSedgeToParent = new Dictionary<int, Edge>();
         }
         public static void BFS(string path, string target, Boolean isAllOccurance)
         {
             //note, the parentid of the root node is -1. the id of the root node is 0
 
-            //cara pake, whoIsMyParent[child] = parent;
+            // Sintaks untuk memakai kode berikut : whoIsMyParent[child] = parent;
             Dictionary<int, int> whoIsMyParent = new Dictionary<int, int>();
-            // cara pake, edgeToPrent[child] = edgeToParent;
+            // Sintaks untuk memakai kode berikut : edgeToPrent[child] = edgeToParent;
             Dictionary<int, Edge> edgeToParent = new Dictionary<int, Edge>();
+            // Penanda sudah ditemukannya file dengan filename yang sesuai
             Boolean Found = false;
 
-            // data yg disimpen di tiap tuple di queue adalah <parent id, self id, diretory full name>
+            // Data yg disimpen di tiap tuple pada queue adalah <parent id, self id, diretory full name>
+            // Parent ID untuk simpul root folder adalah -1, Self ID untuk simpul root folder adalah 0
+            // Parent ID digunakan untuk melihat relasi parent-child antar simpul
+            // Self ID digunakan untuk melihat urutan pengecekan simpul pada graf
             int idcounter = -1;
             Queue<Tuple<int, int, string>> myQueue = new Queue<Tuple<int, int, string>>();
             myQueue.Enqueue(new Tuple<int, int, string>(idcounter, ++idcounter, path));
+
+            // Pada awal, akan di enqueue parent id (-1), self id (0), dan path dari directory awal
+            // Selanjutnya, mengikuti aturan BFS, akan ditambahkan path untuk subdirectory dan file-file yang berada di dalam simpul yang sedang diperiksa
+            // Jika simpul yang diperiksa mengandung subdirectory atau file, maka path untuk mengakses subdirectory dan file tersebut akan ditambahkan ke dalam queue
+            // Untuk setiap folder baru, parent id akan bertambah 1. File yang berada di dalam folder baru tersebut akan memiliki parent id yang sama dengan folder asalnya
+            // Pada kasus dimana terdapat subdirectory DAN file pada sebuah folder, path subdirectory/folder akan terlebih dahulu ditambahkan ke dalam queue
+            // Proses ini akan berlanjut sampai queue kosong atau sampai semua simpul selesai diperiksa.
 
             while (myQueue.Count != 0)
             {
@@ -47,8 +57,8 @@ namespace VSProject
                 DirectoryInfo d = new DirectoryInfo(currentDirectory);
                 if (Directory.Exists(currentDirectory))
                 {
-                    DirectoryInfo[] Directories = d.GetDirectories(); // getting directories
-                    FileInfo[] Files = d.GetFiles(); // getting files
+                    DirectoryInfo[] Directories = d.GetDirectories(); // Untuk mendapatkan semua subdirectory di dalam simpul yang diperiksa
+                    FileInfo[] Files = d.GetFiles(); // Untuk mendapatkan semua file di dalam simpul yang diperiksa (jika simpul yang diperiksa kosong, maka dikembalikan null)
                     foreach (DirectoryInfo directory in Directories)
                     {
                         myQueue.Enqueue(new Tuple<int, int, string>(currentNode.Item2, ++idcounter, directory.FullName));
@@ -64,7 +74,7 @@ namespace VSProject
 
 
 
-                //this is where you code the 'action'
+                // Snippet kode untuk melakukan pengecekan apakah filename sesuai atau tidak
                 string outputName = currentNode.Item1 + ", " + currentNode.Item2 + ", " + d.Name;
                 if(d.Name == target)
                 {
@@ -75,8 +85,7 @@ namespace VSProject
 
                 
 
-                //adding node and edge
-
+                // Menambahkan simpul ke dalam graph
                 GlobalVariable.outputGraph.AddNode(currentNode.Item2.ToString()).Label.Text = outputName;
 
                 if (currentNode.Item2 != 0)
@@ -150,14 +159,14 @@ namespace VSProject
 
 
 
-                // realtime
+                // Untuk menghasilkan graf realtime
                 System.Threading.Thread.Sleep(700);
                 GlobalVariable.viewer.Graph =  GlobalVariable.outputGraph;
                 GlobalVariable.FolderCrawler.outputPanelRefresher();
           
 
 
-                // break if found and not all occurance
+                // break if found and not isAllOccurance
                 if (Found && !isAllOccurance)
                 {
                     break;
@@ -166,9 +175,9 @@ namespace VSProject
         }
         public static void DFSCaller(string path, string target, Boolean isAllOccurance)
         {
-            //note, the parentid of the root node is -1. the id of the root node is 0
+            // same as BFS, the parentid of the root folder is -1. the id of the root node is 0
 
-            //clean dictionary
+            // clean dictionary for new DFS call
             GlobalVariable.DFSedgeToParent.Clear();
 
             Boolean FoundHolder = FolderCrawlerAlgo.DFS(-1, path, target, isAllOccurance);
@@ -182,7 +191,7 @@ namespace VSProject
 
             }
         }
-        public static Boolean DFS(int parentid, string path, string target, Boolean isAllOccurance) // return true if found
+        public static Boolean DFS(int parentid, string path, string target, Boolean isAllOccurance) // return true if file found
         {
             
             Boolean isFound = false; //true if any of the directories inside path contain target or the directory itself contains target
@@ -190,8 +199,8 @@ namespace VSProject
 
             DirectoryInfo[] Directories = d.GetDirectories(); // getting directories
             FileInfo[] Files = d.GetFiles(); // getting files
-            //create root
-            if (parentid == -1) //if root
+
+            if (parentid == -1) // kalau simpul yang diperiksa adalah simpul awal
             {
                 GlobalVariable.outputGraph.AddNode("0").Label.Text = parentid + ",0 , " + d.Name;
                 GlobalVariable.selfidcounter = 0;
@@ -214,7 +223,6 @@ namespace VSProject
                     return true;
                 }
             }
-
             //THIS CHUNK OF CODE IS TO COVER SEARCHING FOR DIRECTORY
 
 
@@ -252,7 +260,7 @@ namespace VSProject
                 //coloring
                 //ifInsideFound, means that the right target file is within me. color me blue
                 //else, if my color is not blue, color me red
-                GlobalVariable.outputGraph.FindNode(selfid.ToString()).Label.Text += isInsideFound.ToString();
+                //GlobalVariable.outputGraph.FindNode(selfid.ToString()).Label.Text += isInsideFound.ToString();
 
                 Color color = Color.Black;
                 if (isInsideFound)

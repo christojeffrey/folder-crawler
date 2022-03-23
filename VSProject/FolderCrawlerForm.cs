@@ -75,6 +75,10 @@ namespace VSProject
         {
             if(LabelDirectory.Text != "")
             {
+                //clean timer
+                LabelTimer.Text = "Time Taken ";
+                //start timer
+                DateTime start = DateTime.Now;
                 if (DFSButton.Checked == true)
                 {//clearing the graph
                     foreach (Node node in FolderCrawlerAlgo.GlobalVariable.outputGraph.Nodes.ToArray())
@@ -120,6 +124,11 @@ namespace VSProject
                     // outputing to graph
                     FolderCrawlerAlgo.GlobalVariable.viewer.Graph = FolderCrawlerAlgo.GlobalVariable.outputGraph;
                 }
+                //stop timer
+                TimeSpan duration = DateTime.Now.Subtract(start);
+                //update timer to label
+                LabelTimer.Text += duration.TotalSeconds.ToString();
+                LabelTimer.Text += " s";
             }
             //else, belum ada directory yg dipilih
 
@@ -189,5 +198,14 @@ namespace VSProject
 
         }
 
+        private void BackgroundPanel_Paint(object sender, PaintEventArgs e)
+        {
+
+        }
+
+        private void label3_Click(object sender, EventArgs e)
+        {
+
+        }
     }
 }

@@ -11,10 +11,8 @@ this is a folder crawler--a program to search over a tree datastructure, until t
 
 ## who made this
 Kelompok 35 – tubes.rawr 
-
-Gede Prasidha Bhawarnawa 13520004 
-
-Christopher Jeffrey 13520055 
-
-Lyora Felicya 13520073 
-[link laporan](https://itbdsti-my.sharepoint.com/:w:/g/personal/13520073_mahasiswa_itb_ac_id/EXk5idgLkXdDqjgso3W5usABkPetelgdQGrpAEWy6MYmtg?rtime=EymyYjYI2kg)
+<table>
+<tr><td>No.</td><td>Nama</td><td>NIM</td></tr>
+<tr><td>1.</td><td>Gede Prasidha Bhawarnawa</td><td>13520004</td></tr>
+<tr><td>2.</td><td>Christopher Jeffrey</td><td>13520055</td></tr>
+<tr><td>3.</td><td>Lyora Felicya</td><td>13520073</td></tr>
